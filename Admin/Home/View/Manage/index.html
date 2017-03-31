@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台管理系统</title>
+	<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/list.css">
+	<script scr="__PUBLIC__/ui_js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/ui_js/jquery.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
+	<script src="__PUBLIC__/ui_js/js.js"></script>
+    <style type="text/css">
+		${demo.css}
+
+		#pages tr {
+			display: none;
+		}
+    </style>
+    <script type="text/javascript">
+		$(function () {
+		    $('#container').highcharts({
+		        chart: {
+		            type: 'line'
+		        },
+		        title: {
+		            text: '实验室设备报障数据统计'
+		        },
+		        subtitle: {
+		            text: 'Source: 计算机调研室'
+		        },
+		        xAxis: {
+		            categories: [{$data0}]//这里应该输入时间
+		        },
+		        yAxis: {
+		            title: {
+		                text: '故障设备统计/ (台)'
+		            }
+		        },
+		        plotOptions: {
+		            line: {
+		                dataLabels: {
+		                    enabled: true
+		                },
+		                enableMouseTracking: false
+		            }
+		        },
+		        series: [{
+		            name: '键盘故障',
+		            data: [{$data}]//这里应该输入到诊数据
+		        }, {
+		            name: '鼠标故障',
+		            data: [{$data1}]//这里应该输入未到诊数据
+		        },{
+		            name: '显示器故障',
+		            data: [{$data2}]//这里应该输入未到诊数据
+		        }]
+		    });
+		});
+    </script>
+</head>
+<body style="background-color: #FFFFF0;">
+	<div class="container-fluid">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<span class="navbar-brand">实验室报障后台管理系统</span>
+				</div>
+			</div>
+		</nav>
+		<div class="row list-body">
+			<div class="list-right col-md-10 col-md-offset-1">
+				<div class="row">
+					<script src="__PUBLIC__/js/highcharts.js"></script>
+					<script src="__PUBLIC__/js/modules/exporting.js"></script>
+
+					<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+				</div>
+				<div class="row">
+					<div class="table-responsive">
+						<table class="table table-hover table-striped">
+							<thead style="font-size: 16px" >
+								<tr>
+									<td>实验室</td>
+									<td>计算机</td>
+									<td>故障</td>
+									<td>备注</td>
+									<td>提交时间</td>
+									<td>状态</td>
+									<td>操作</td>
+								</tr>
+							</thead>
+							
+							<tbody id="pages">
+								<volist name='info_rec' id='vo'>
+									<tr>
+					                    <td>{$vo.lab}</td>
+					                    <td>{$vo.computer}</td>
+					                    <td>
+					                    	<php> 
+					                    	    $aaa = $vo['fault'];
+										        for($a = 0; $a < count($aaa); $a++) {
+										            $my_fault = explode(",", $aaa);   
+										        }
+					                    		for($a = 0; $a < 4; $a++) {
+													switch($my_fault[$a]) {
+														case 1: 
+															echo "<p>鼠标损坏或没有鼠标</p>";  
+															break;
+														case 2:
+															echo "<p>键盘损坏或没有键盘</P>";
+															break;
+														case 3:
+															echo "<p>显示器不亮</P>";
+															break;
+														case 4:
+															echo "<p>按开机没反应</P>";
+															break;
+														default: break;
+													}	
+					                    		}
+					                    	</php>    	 	                    		
+					                    </td>
+					                    <td>{$vo.ps}</td>
+					                    <td>{$vo.post_time}</td>
+										<td id="p-state">
+											<if condition="$vo[state] eq ''">
+												<button type="button" class="btn btn-sm btn-success" disabled="disabled" id="state">未操作</button>
+											</if>
+											<if condition="$vo[state] eq '维修'">
+												<button type="button" class="btn btn-sm btn-warning" disabled="disabled" id="state">维修</button>
+											</if>
+											<if condition="$vo[state] eq '送修'">
+												<button type="button" class="btn btn-sm btn-warning" disabled="disabled" id="state">送修</button>
+											</if>
+											<if condition="$vo[state] eq '完成'">
+												<button type="button" class="btn btn-sm btn-info" disabled="disabled" id="state">完成</button>
+											</if>
+										</td>
+										<td>
+											<form style="display:inline;">
+												<if condition="$vo[state] eq ''">
+													<input type="button" name="state" class="btn btn-sm btn-warning" id="repair" value="维修">
+												</if>
+													<input style="display: none;" value="{$vo.id}" id="id">			
+												<if condition="$vo[state] eq '维修'">
+													<input type="button" name="state" class="btn btn-sm btn-info" id="success" value="完成">
+													<input type="button" name="state" class="btn btn-sm btn-info" id="success" value="送修">
+												</if>
+											</form>
+											<form style="display:inline;">
+												<input type="button" class="btn btn-sm btn-danger" id="danger" value="删除" />
+												<input style="display: none;" value="{$vo.id}" id="id">
+											</form>
+										</td>
+									</tr>
+								</volist> 
+							</tbody>
+						</table>
+					</div>
+					<div class="text-center">
+						<nav aria-label="Page navigation">
+						  <ul class="pagination" id="page">
+						    <li id="previous">
+						      <a href="#page" aria-label="Previous">
+						        <span aria-hidden="true">&laquo;</span>
+						      </a>
+						    </li>
+						    <li  class="active" id="yema"><a href="#page">1 <span class="sr-only">(current)</span></a></li>
+						    <li  id="yema"><a href="#page">2 <span class="sr-only">(current)</span></a></li>
+						    <li id="yema"><a href="#page">3 <span class="sr-only">(current)</span></a></li>
+						    <li id="yema"><a href="#page">4 <span class="sr-only">(current)</span></a></li>
+						    <li id="yema"><a href="#page">5 <span class="sr-only">(current)</span></a></li>
+						    <li id="next">
+						      <a href="#page" aria-label="Next">
+						        <span aria-hidden="true">&raquo;</span>
+						      </a>
+						    </li>
+						  </ul>
+						</nav>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		//登录ajax交互
+	    $(function(){
+	        $('input#danger').each(function(){
+	        //获取删除
+		        $(this).click(function() {
+		        	var this1 = $(this);
+		        	var id = $(this).siblings().val();
+		        	$.ajax({
+		                type: "post",
+		                url: "__URL__/delete",
+		                data: "id=" + id,
+		                dataType: 'text',
+		                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		                success: function(data) {
+		                   var obj = new Function("return" + data)();
+		                   alert(obj.info);
+		                   if(obj.info == "数据删除成功！") {
+		                   		$(this1).parent().parent().parent().remove();
+		                   		$("#pages tr").hide();
+								var nowpage = 0;
+								$("#page li").each(function() {
+									if($(this).attr("class") == "active") {
+										nowpage = parseInt($(this).children("a").text());
+										return false;
+									} 
+								});
+								var now = (nowpage -1) * 10;
+								for(var i = 0; i < 10; i++) {
+									$("#pages").children('tr').eq(now).show();
+									now++;
+								}
+		                   }
+		                }
+		            });
+		        });
+		    });
+
+		    $('input#repair').each(function(){
+	        //获取模态框数据
+	        	var sign = 0;
+		        $(this).click(function() {
+		        	sign++;
+		        	var this1 = $(this);
+		        	var id = $(this).siblings().val();
+		        	var thisval = $(this).val();
+		        	$.ajax({
+		                type: "post",
+		                url: "__URL__/update",
+		                data: {
+		                	"id": id,
+		                	"state": thisval
+		                },
+		                dataType: 'text',
+		                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		                success: function(data) {
+		                   var obj = new Function("return" + data)();
+		                   alert(obj.info);
+		                   if(obj.info == "状态更新成功！") {
+			                   $(this1).val("完成").removeClass("btn-warning").addClass("btn-info").removeAttr("id");
+			                   $(this1).attr("id", "success");
+					 		   $(this1).parent().parent().siblings("#p-state").children("#state").text("维修").removeClass("btn-success").addClass("btn-warning");
+					 		}
+					 		if(sign == 2) {
+					 			 $(this1).hide();
+						 	     $(this1).parent().parent().siblings("#p-state").children("#state").text("完成").addClass("btn-info");
+					 		}
+		                }
+		            });
+		        });
+		    });
+
+		    $('input#success').each(function(){
+	        //获取模态框数据
+		        $(this).click(function() {
+		        	var this1 = $(this);
+		        	var id = $(this).siblings().val();
+		        	var thisval = $(this).val();
+		        	$.ajax({
+		                type: "post",
+		                url: "__URL__/update",
+		                data: {
+		                	"id": id,
+		                	"state": thisval
+		                },
+		                dataType: 'text',
+		                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		                success: function(data) {
+		                   var obj = new Function("return" + data)();
+		                   alert(obj.info);
+		                   if(obj.info == "状态更新成功！") {
+				                    $(this1).hide();
+						 	        $(this1).parent().parent().siblings("#p-state").children("#state").text("完成").addClass("btn-info");
+					 		}
+		                }
+		            });
+		        });
+		    });
+	 	});
+	</script>
+</body>
+</html>
+

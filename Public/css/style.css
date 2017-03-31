@@ -1,0 +1,94 @@
+body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6, span { font-family: '宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.main {
+	margin: 20px 0 ;
+}
+
+.title {
+	border-bottom: 1px solid #eee;
+	padding: 10px;
+	font-size: 25px;
+	line-height: 45px;
+	font-weight: bold;
+	position: relative;
+}
+
+.title-right {
+	float:right;
+	font-size: 14px;
+	line-height:14px;
+	font-weight: normal;
+	bottom: 10px;
+	position: absolute;
+	right: 10px;
+}
+
+.form {
+	background: rgba(30, 144, 255, 0.2);
+	width: 450px;
+	margin: 100px auto;
+	padding: 80px 0;
+	border-radius: 5px;
+}
+
+#login_form {
+	display: block;
+}
+
+#register_form {
+	display: none;
+}
+
+.fa {
+	display: inline-block;
+	top: 27px;
+	left: 6px;
+	position: relative;
+	color: #ccc;
+}
+
+.form-title {
+	padding-left: 14px;
+	font-weight: bold;
+}
+
+.choose {
+	height: 150px;
+	background-color: #FFF;
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-radius: 4px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, .17);
+	overflow: auto;
+	font-size: 17px;
+	display: none;
+}
+
+.choose li {
+	width: 100%;
+	list-style: none;
+	padding-left: 20px;
+	display: block;
+	letter-spacing: 0.5em;
+}
+
+.choose li:hover {
+	cursor: pointer;
+	background-color: #f5f5f5;
+}
+
+.see {
+	position: absolute;
+	top: 25px;
+	right: -60px;
+}
+
+.see:hover {
+	cursor: pointer;
+	display: inline-block;
+	color: blue;
+}

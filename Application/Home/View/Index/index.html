@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实验室电脑报障系统</title>
+	<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/style.css?t=2017329">
+	<script src="__PUBLIC__/ui_js/jquery.js"></script>
+	<script src="__PUBLIC__/ui_js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: #FFFAF0;">
+	<div class="container">
+		<div class="row main">
+			<div class="title col-md-offset-1 col-md-10">
+				<div class="title-left">北理珠实验室电脑报障系统</div>
+				<div class="title-right" id="timenow"></div>
+			</div>
+		</div>
+		<div class="row main">
+			<div class="col-md-offset-2 col-md-8">
+				<form class="form-horizontal" action="__URL__/create" method="post" name="create">
+					<div class="form-group">
+						<label for="shiyanshi" class="col-sm-2 control-label input-lg" >实验室号</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control input-lg" id="shiyanshi" name="lab" placeholder="实验室号(请选择，或输入M、Z筛选后再选择)" autocomplete="off">
+							<ul class="choose" id="choose">
+							    <li id="M_hide">MD501</li>
+							    <li id="M_hide">MD502</li>
+							    <li id="M_hide">MD503</li>
+							    <li id="M_hide">MD504</li>
+							    <li id="M_hide">MD505</li>
+							    <li id="M_hide">MD506</li>
+							    <li id="M_hide">MD303</li>
+							    <li id="M_hide">MD304</li>
+							    <li id="M_hide">MB402</li>
+							    <li id="M_hide">MB403</li>
+							    <li id="M_hide">MB404</li>
+							    <li id="M_hide">MB405</li>
+							    <li id="M_hide">MB406</li>
+							    <li id="M_hide">MB502</li>
+							    <li id="M_hide">MB502</li>
+							    <li id="M_hide">MB504</li>
+							    <li id="M_hide">MB505</li>
+							    <li id="M_hide">MB506</li>
+							    <li id="Z_hide">ZA302</li>
+							    <li id="Z_hide">ZA303</li>
+							    <li id="Z_hide">ZA304</li>
+							    <li id="Z_hide">ZA401</li>
+							    <li id="Z_hide">ZA402</li>
+							    <li id="Z_hide">ZA403</li>
+							    <li id="Z_hide">ZA404</li>
+							    <li id="Z_hide">ZA405</li>
+							    <li id="Z_hide">ZA407</li>
+							    <li id="Z_hide">ZA204</li>
+							    <li id="Z_hide">ZA503</li>
+							    <li id="Z_hide">ZA505</li>
+							    <li id="Z_hide">ZA203</li>
+							    <li id="Z_hide">ZA501</li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="jiqi" class="col-sm-2 control-label input-lg">机器号</label>
+						<div class="col-sm-10" style="position: relative;">
+							<input type="text" class="form-control input-lg" id="jiqi" name="computer" placeholder="机器号（请填写ip）">
+							<!-- Button trigger modal -->
+							<div class="see" data-toggle="modal" data-target="#myModal">
+								<span>Ip查看说明</span>
+							</div>
+
+							<!-- Modal -->
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content" style="width: 700px">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							        <h4 class="modal-title" id="myModalLabel">Ip查看说明</h4>
+							      </div>
+							      <div class="modal-body" >
+							        <div>
+									  <!-- Nav tabs -->
+									  <ul class="nav nav-tabs" role="tablist">
+									    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">xp系统</a></li>
+									    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">win7系统</a></li>
+									  </ul>
+
+									  <!-- Tab panes -->
+									  <div class="tab-content" style="height: 400px; overflow: auto;">
+									    <div role="tabpanel" class="tab-pane active" id="home">
+											<p style="padding-top: 10px">&nbsp打开我的电脑,找到控制面板,在控制面板中找到网络连接,选中本地连接,看到在左下方显示了本机IP了.</p>
+											<img src="__PUBLIC__/images/xp-1.jpg" alt="">
+											<img src="__PUBLIC__/images/xp-2.jpg" alt="">
+											<img src="__PUBLIC__/images/xp-3.jpg" alt="">
+											<img src="__PUBLIC__/images/xp-4.jpg" alt="">
+									    </div>
+									    <div role="tabpanel" class="tab-pane" id="profile">
+									    	<p style="padding-top: 10px">&nbsp通过网络图标本地属性查看：右键桌面右下角的网络图标 — 点击打开共享和网络中心 — 本地连接 — 详细信息 就能查看到电脑的IP地址。</p>
+									    	<img src="__PUBLIC__/images/win-1.jpg" alt="">
+									    	<img src="__PUBLIC__/images/win-2.jpg" alt="">
+									    </div>
+									  </div>
+
+									</div>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="formGroupInputLarge" class="col-sm-2 control-label input-lg">故障原因</label>
+						<div class="col-sm-10">
+							<label class="checkbox-inline input-lg" style="padding-left: 26px">
+							  <input type="checkbox" id="result1" name="checkbox[]" value="1,"> 鼠标损坏或没有鼠标
+							</label>
+							<label class="checkbox-inline input-lg">
+							  <input type="checkbox" id="result2" name="checkbox[]" value="2,"> 键盘损坏或没有键盘
+							</label>
+							<label class="checkbox-inline input-lg">
+							  <input type="checkbox" id="result3" name="checkbox[]" value="3,"> 显示器不亮
+							</label>
+							<label class="checkbox-inline input-lg">
+							  <input type="checkbox" id="result4" name="checkbox[]" value="4"> 按开机没反应
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="formGroupInputLarge" class="col-sm-2 control-label input-lg">备注</label>
+						<div class="col-sm-10">
+							<textarea class="form-control input-lg" rows="3" name="ps" style="resize:none" placeholder="备注"></textarea>
+						</div>
+					</div>
+					<input type="submit" class="btn btn-success btn-lg btn-block" id="form-up" value="Send" />
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="__PUBLIC__/ui_js/js.js"></script>
+	<script>
+		$(function(){
+	        $('#form-up').click(function(event){
+		        //获取模态框数据
+		        var shiyanshi = $('#shiyanshi').val();
+		        var jiqi = $('#jiqi').val();
+		        if(shiyanshi==""||shiyanshi==null){
+		            alert("实验室号不能为空！");
+		            $("#shiyanshi").focus();
+		            return false;
+		        }
+		        if(jiqi==""||jiqi==null){
+		            alert("机器号不能为空！");
+		            $("#jiqi").focus();
+		            return false;
+		        }
+		        if (($("input:checkbox[name='checkbox[]']:checked").length) == 0){
+		        	alert("无故障原因被选中！");
+		            return false;
+		        }
+
+		        $.ajax({
+			        type: "post",
+			        url: "__URL__/create",
+			        dataType: 'text',
+			        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			        success: function(data) {
+			        	alert(data);
+			            $('#register').modal('hide');
+			           var obj = new Function("return" + data)();
+			//                     alert();
+			            alert(obj.info);
+			            location.reload();
+			        },
+			        error: function() {
+			        	alert(error);
+			        }
+
+		        });
+
+	        });
+		});
+	</script>
+</body>
+</html>

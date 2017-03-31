@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录</title>
+	<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/style.css">
+	<script src="__PUBLIC__/ui_js/bootstrap.min.js"></script>
+	<srcipt	src="__PUBLIC__/ui_js/jquery.js"></script>
+</head>
+<body style="background-color: #FFFAF0;">
+	<div class="container">
+		<div class="row form">
+			<form action="__URL__/login" method="post" name="login" class="form-horizontal" id="login_form">
+				<h2 class="form-title col-md-offset-2">实验室报障后台登录</h3>
+				<div class="col-md-8 col-md-offset-2">
+					<div class="form-group input-group">
+						<input type="hidden" name="unique" value="1">
+						<span class="input-group-addon" id="basic-addon1">
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						</span>
+						<input type="text" class="form-control required input-lg" placeholder="用户名" name="username" autofocus="autofocus" aria-describedby="basic-addon1">
+					</div>
+					<div class="form-group input-group">
+						<span class="input-group-addon" id="basic-addon2">
+							<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+						</span>
+						<input type="password" class="form-control required input-lg" placeholder="密码" name="password" aria-describedby="basic-addon2">
+					</div>
+					<input type="submit" value="Send" class="btn btn-success btn-lg btn-block" />
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
