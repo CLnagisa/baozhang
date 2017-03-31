@@ -143,17 +143,24 @@ class ManageController extends Controller {
     public function update(){
         $m=M('Info');
         $data['id']=$_POST['id'];
+        $data1['id']=$_POST['id'];
         $data['state']=$_POST['state'];
         $count=$m->save($data);
         if ($count > 0) {
             $data['status'] = 1;
             $data['info'] = "状态更新成功！";
+            $data1['operation']=date('y-m-d h:i:s',time());
+            $m->save($data1);
+            if($count1 > 0)  {
+                $data['info'] = "状态！";
+            }
             $this->ajaxReturn($data);
 /*            echo '<script>alert("状态更新成功！")</script>';
             $this->redirect('Manage/index');*/
         } else {
             $data['status'] = 1;
             $data['info'] = "状态更新失败！";
+
             $this->ajaxReturn($data);
 /*            echo '<script>alert("状态更新失败！")</script>';
             $this->redirect('Manage/index');*/
